@@ -32,8 +32,9 @@ body, html {
 
 .counter {
     color: white;
-    font-size: 30rem;
+    font-size: 35rem;
     margin-bottom: 20px;
+    font-weight: 900;
 }
 
 .update-btn {
