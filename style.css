@@ -97,9 +97,20 @@ th {
 
 /* Ajustes para la celda de imagen */
 .image-cell {
+    position: relative; /* Necesario para posicionar la "X" sobre la imagen */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cross {
+    position: absolute;
+    top: 5%; /* Ajusta según sea necesario */
+    left: 25%; /* Ajusta según sea necesario */
+    color: red; /* Color de la "X" */
+    font-size: 3rem; /* Tamaño de la "X" */
+    font-weight: bold; /* Hacer la "X" más gruesa */
+    display: none; /* Ocultar por defecto */
 }
 
 .table-img {

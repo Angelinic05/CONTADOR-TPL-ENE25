@@ -29,11 +29,11 @@
             </div>
         </div>
     </div>
-    <div class="winner-container" id="winner-container">
+    <!-- <div class="winner-container" id="winner-container">
         <div class="winner-number" id="winner-number">0</div>
         <img class="winner-img" id="winner-img" src="" alt="">
         <button class="close-btn" onclick="closeWinner()">Cerrar</button>
-    </div>
+    </div> -->
     <audio id="counter-sound" src="sonido2.mp3" preload="auto"></audio>
     <audio id="winner-sound" src="ganador.mp3" preload="auto"></audio>
     <script>
@@ -120,6 +120,7 @@ function updateTableColors(counterValue) {
     rows.forEach(row => {
         const numberCell = row.querySelector("td:nth-child(2)");
         const imageCell = row.querySelector(".table-img");
+        const cross = row.querySelector(".cross"); // Obtener la "X"
 
         if (numberCell) {
             const cellValue = parseInt(numberCell.innerText, 10);
@@ -129,16 +130,19 @@ function updateTableColors(counterValue) {
                 numberCell.style.color = "#0dabdc";
                 numberCell.style.fontWeight = "800";
                 imageCell.style.filter = "none"; // Imagen a color
+                if (cross) cross.style.display = "none"; // Ocultar la "X"
             } else if (cellValue < counterValue) {
                 // 🔻 Números menores pero lejanos -> Gris
                 numberCell.style.color = "#152c6f";
                 numberCell.style.fontWeight = "800";
                 imageCell.style.filter = "grayscale(100%)"; // Imagen en blanco y negro
+                if (cross) cross.style.display = "block"; // Mostrar la "X"
             } else {
                 // ✅ Números mayores -> Blanco
                 numberCell.style.color = "white";
                 numberCell.style.fontWeight = "800";
                 imageCell.style.filter = "none"; // Imagen a color
+                if (cross) cross.style.display = "none"; // Ocultar la "X"
             }
         }
     });
@@ -230,6 +234,7 @@ for (let i = 0; i < datos.length; i++) {
     row.innerHTML = `
         <td class="image-cell ${i === 0 ? 'first-row' : ''}" data-index="${i + 1}">
             <div class="table-img"></div>
+            <div class="cross">X</div> <!-- Agregar la "X" aquí -->
         </td>
         <td>${datos[i]}</td>
     `;
