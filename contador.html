@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador y Tabla</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="counter-container">
+            <div class="counter" id="counter">0</div>
+            <button class="update-btn" onclick="updateCounter()">ACTUALIZAR</button>
+        </div>
+        <div class="table-container">
+            <div class="table-half">
+                <table id="table-1">
+                    <tbody id="table-body-1">
+                        <!-- Filas generadas con JavaScript para la primera tabla -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-half">
+                <table id="table-2">
+                    <tbody id="table-body-2">
+                        <!-- Filas generadas con JavaScript para la segunda tabla -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="winner-container" id="winner-container">
+        <h3 style="font-size: 50px;">FELIZ GANADOR</h3>
+        <div class="winner-number" id="winner-number">0</div>
+        <img class="winner-img" id="winner-img" src="" alt="">
+        <button class="close-btn" onclick="closeWinner()">Cerrar</button>
+    </div>
+    <audio id="counter-sound" src="sonido2.mp3" preload="auto"></audio>
+    <audio id="winner-sound" src="ganador.mp3" preload="auto"></audio>
+    <script>
+       let currentNumber = 0; // Definir currentNumber como variable global
+
+// Función para obtener el valor de la celda A1
+function getValorA1() {
+    // URL del Google Apps Script
+    const url = 'https://script.google.com/macros/s/AKfycby_Jeq2VR98TduA2FhCcpy6pa5zUOd-skLen4alCfv_-ye5Ck8fudJgzfCVrmLwMcGoGw/exec';
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Datos recibidos:', data); // Log para verificar la respuesta
+            const venta = data.venta; // Valor de la celda A1
+            if (venta) {
+                animateNumber(venta); // Llama a la función de animación
+            } else {
+                console.log('No se encontró valor para la celda A1.');
+            }
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
+}
+
+// Función para animar el contador
+function animateNumber(finalValue) {
+    currentNumber = 0; // Reiniciar el contador al inicio de la animación
+    const counterElement = document.getElementById('counter');
+    const duration = 10000; // Duración total de la animación
+    const increment = finalValue / (duration / 70); // Incremento por intervalo
+
+    // Obtener el elemento de audio
+    const counterSound = document.getElementById('counter-sound');
+
+    // Reproducir el sonido solo si no está reproduciéndose
+    if (counterSound.paused) {
+        counterSound.currentTime = 0; // Reiniciar el sonido
+        counterSound.play(); // Reproducir el sonido
+    }
+
+    const interval = setInterval(() => {
+        currentNumber += increment;
+        counterElement.innerText = Math.floor(currentNumber);
+        updateTableColors(Math.floor(currentNumber)); // Pasar currentNumber a la función
+
+        if (currentNumber >= finalValue) { // Cambiar a >= para incluir el valor final
+            clearInterval(interval);
+            counterElement.innerText = finalValue;
+            updateTableColors(finalValue); // Asegurar que los colores finales sean correctos
+            
+            // Detener el sonido
+            counterSound.pause();
+            counterSound.currentTime = 0; // Reiniciar el sonido
+
+            // Obtener el número y la imagen del ganador
+            const winnerNumber = getWinnerNumber();
+            const winnerImage = getWinnerImage();
+            showWinner(winnerNumber, winnerImage); // Mostrar al ganador
+        }
+    }, 50);
+}
+
+// Función para actualizar los colores de la tabla
+function updateTableColors(counterValue) {
+    const rows = document.querySelectorAll("tbody tr");
+    let closestRow = null;
+    let closestDiff = Infinity;
+
+    // Buscar el número más cercano sin importar si es mayor o menor
+    rows.forEach(row => {
+        const numberCell = row.querySelector("td:nth-child(2)");
+        if (numberCell) {
+            const cellValue = parseInt(numberCell.innerText, 10);
+            const diff = Math.abs(counterValue - cellValue); // Diferencia absoluta
+
+            if (diff < closestDiff) {
+                closestDiff = diff;
+                closestRow = row;
+            }
+        }
+    });
+
+    // Aplicar colores según la lógica
+    rows.forEach(row => {
+        const numberCell = row.querySelector("td:nth-child(2)");
+        const imageCell = row.querySelector(".table-img");
+
+        if (numberCell) {
+            const cellValue = parseInt(numberCell.innerText, 10);
+
+            if (row === closestRow) {
+                // 🔹 Número más cercano -> Azul fuerte
+                numberCell.style.color = "#0dabdc";
+                numberCell.style.fontWeight = "800";
+                imageCell.style.filter = "none"; // Imagen a color
+            } else if (cellValue < counterValue) {
+                // 🔻 Números menores pero lejanos -> Gris
+                numberCell.style.color = "#152c6f";
+                numberCell.style.fontWeight = "800";
+                imageCell.style.filter = "grayscale(100%)"; // Imagen en blanco y negro
+            } else {
+                // ✅ Números mayores -> Blanco
+                numberCell.style.color = "white";
+                numberCell.style.fontWeight = "800";
+                imageCell.style.filter = "none"; // Imagen a color
+            }
+        }
+    });
+}
+
+// Funciones para obtener el número y la imagen del ganador
+function getWinnerNumber() {
+    const rows = document.querySelectorAll("tbody tr");
+    let closestRow = null;
+    let closestDiff = Infinity;
+
+    rows.forEach(row => {
+        const numberCell = row.querySelector("td:nth-child(2)");
+        if (numberCell) {
+            const cellValue = parseInt(numberCell.innerText, 10);
+            const diff = Math.abs(currentNumber - cellValue); // Diferencia absoluta
+
+            if (diff < closestDiff) {
+                closestDiff = diff;
+                closestRow = row;
+            }
+        }
+    });
+
+    return closestRow ? closestRow.querySelector("td:nth-child(2)").innerText : null;
+}
+
+function getWinnerImage() {
+    const rows = document.querySelectorAll("tbody tr");
+    let closestRow = null;
+    let closestDiff = Infinity;
+
+    rows.forEach(row => {
+        const numberCell = row.querySelector("td:nth-child(2)");
+        if (numberCell) {
+            const cellValue = parseInt(numberCell.innerText, 10);
+            const diff = Math.abs(currentNumber - cellValue); // Diferencia absoluta
+
+            if (diff < closestDiff) {
+                closestDiff = diff;
+                closestRow = row;
+            }
+        }
+    });
+
+    // Cambiar la forma de obtener la imagen
+    if (closestRow) {
+        const imgIndex = closestRow.querySelector("td:nth-child(1)").dataset.index; // Obtener el índice
+        return `Images/${imgIndex}.png`; // Construir la ruta de la imagen
+    }
+    return null;
+}
+
+// Función para mostrar al ganador
+function showWinner(number, imageUrl) {
+    document.getElementById('winner-number').innerText = number;
+    document.getElementById('winner-img').style.backgroundImage = `url(${imageUrl})`; // Cambiar la forma en que se muestra la imagen
+    document.getElementById('winner-container').style.display = 'flex';
+
+    // Reproducir el sonido del ganador
+    const winnerSound = document.getElementById('winner-sound');
+    winnerSound.currentTime = 0; // Reiniciar el sonido
+    winnerSound.play(); // Reproducir el sonido
+}
+
+function closeWinner() {
+    document.getElementById('winner-container').style.display = 'none';
+}
+
+// Función para actualizar el contador
+function updateCounter() {
+    // Obtén el valor del contador (el valor de la celda A1)
+    getValorA1(); 
+}
+
+// Datos que se mostrarán en la columna derecha (ejemplo)
+const datos = [
+    190, 210, 230, 235, 240, 245, 248, 250, 257, 260,
+    265, 266, 270, 280, 282, 290, 295, 298, 300, 310,
+    311, 312, 315, 320, 326, 345, 350, 377, 380
+];
+
+// Generar filas para las tablas
+const tableBody1 = document.getElementById("table-body-1");
+const tableBody2 = document.getElementById("table-body-2");
+
+for (let i = 0; i < datos.length; i++) {
+    let row = document.createElement("tr");
+    row.innerHTML = `
+        <td class="image-cell ${i === 0 ? 'first-row' : ''}" data-index="${i + 1}">
+            <div class="table-img"></div>
+        </td>
+        <td>${datos[i]}</td>
+    `;
+    
+    if (i < 15) {
+        tableBody1.appendChild(row); // Las primeras 15 filas en la tabla 1
+    } else {
+        tableBody2.appendChild(row); // Las últimas 14 filas en la tabla 2
+    }
+}
+    </script>
+</body>
+</html>

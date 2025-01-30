@@ -1,0 +1,305 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: #08112c;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.counter-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: #f0f0f0; */
+    padding: 20px;
+    overflow: hidden;
+}
+
+.counter {
+    color: white;
+    font-size: 30rem;
+    margin-bottom: 20px;
+}
+
+.update-btn {
+    padding: 10px 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    background: #760ffc;
+    color: white;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.update-btn:hover {
+    background: #8528ff;
+}
+
+.update-btn:active {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+}
+
+
+/* Cambiar de columna a fila para las tablas */
+.table-container {
+    display: flex;
+    width: 20%;
+    justify-content: space-around; /* Para separar las tablas */
+    height: 100%;
+    padding: 10px;
+    gap: 8%;
+}
+
+.table-half {
+    width: 35%; /* Ajustar el tamaño de las tablas */
+    height: 100%;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Hace que las celdas tengan un tamaño fijo */
+}
+
+th, td {
+    font-weight: 800;
+    color: white;
+    /* border: 1px solid #ddd; */
+    padding: 0;
+    text-align: center;
+    font-size: 1.7rem;
+    word-wrap: break-word;
+    position: relative;
+}
+
+th {
+    /* background: #007bff; */
+    /* color: white; */
+}
+
+/* Ajustes para la celda de imagen */
+.image-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-img {
+    width: 60px; /* Tamaño de la imagen */
+    height: 60px;
+    object-fit: cover; /* Asegura que la imagen se ajuste */
+    border-radius: 50%; /* Forma circular */
+}
+
+/* Imágenes diferentes para cada fila */
+.image-cell[data-index="1"] .table-img {
+    content: url('Images/1.png');
+}
+
+.image-cell[data-index="2"] .table-img {
+    content: url('Images/2.png');
+}
+
+.image-cell[data-index="3"] .table-img {
+    content: url('Images/3.png');
+}
+
+.image-cell[data-index="4"] .table-img {
+    content: url('Images/4.png');
+}
+
+.image-cell[data-index="5"] .table-img {
+    content: url('Images/5.png');
+}
+
+.image-cell[data-index="6"] .table-img {
+    content: url('Images/6.png');
+}
+
+.image-cell[data-index="7"] .table-img {
+    content: url('Images/7.png');
+}
+
+.image-cell[data-index="8"] .table-img {
+    content: url('Images/8.png');
+}
+
+.image-cell[data-index="9"] .table-img {
+    content: url('Images/9.png');
+}
+
+.image-cell[data-index="10"] .table-img {
+    content: url('Images/10.png');
+}
+
+.image-cell[data-index="11"] .table-img {
+    content: url('Images/11.png');
+}
+
+.image-cell[data-index="12"] .table-img {
+    content: url('Images/12.png');
+}
+
+.image-cell[data-index="13"] .table-img {
+    content: url('Images/13.png');
+}
+
+.image-cell[data-index="14"] .table-img {
+    content: url('Images/14.png');
+}
+
+.image-cell[data-index="15"] .table-img {
+    content: url('Images/15.png');
+}
+
+.image-cell[data-index="16"] .table-img {
+    content: url('Images/16.png');
+}
+
+.image-cell[data-index="17"] .table-img {
+    content: url('Images/17.png');
+}
+
+.image-cell[data-index="18"] .table-img {
+    content: url('Images/18.png');
+}
+
+.image-cell[data-index="19"] .table-img {
+    content: url('Images/19.png');
+}
+
+.image-cell[data-index="20"] .table-img {
+    content: url('Images/20.png');
+}
+
+.image-cell[data-index="21"] .table-img {
+    content: url('Images/21.png');
+}
+
+.image-cell[data-index="22"] .table-img {
+    content: url('Images/22.png');
+}
+
+.image-cell[data-index="23"] .table-img {
+    content: url('Images/23.png');
+}
+
+.image-cell[data-index="24"] .table-img {
+    content: url('Images/24.png');
+}
+
+.image-cell[data-index="25"] .table-img {
+    content: url('Images/25.png');
+}
+
+.image-cell[data-index="26"] .table-img {
+    content: url('Images/26.png');
+}
+
+.image-cell[data-index="27"] .table-img {
+    content: url('Images/27.png');
+}
+
+.image-cell[data-index="28"] .table-img {
+    content: url('Images/28.png');
+}
+
+.image-cell[data-index="29"] .table-img {
+    content: url('Images/29.png');
+}
+.winner-container {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.winner-number {
+    font-size: 10rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.winner-img {
+    width: 400px; /* Tamaño del contenedor de la imagen */
+    height: 400px; /* Tamaño del contenedor de la imagen */
+    background-size: cover; /* Asegura que la imagen cubra el contenedor */
+    background-position: center; /* Centra la imagen */
+    border-radius: 50%; /* Forma circular */
+    border: 5px solid white; /* Borde blanco */
+}
+
+.close-btn {
+    margin-top: 20px; /* Espaciado superior */
+    padding: 10px 20px; /* Espaciado interno (vertical y horizontal) */
+    font-size: 1.5rem; /* Tamaño de la fuente */
+    background: #760ffc; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 10px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+/* Efecto hover */
+.close-btn:hover {
+    background: #8528ff; /* Color de fondo al pasar el mouse */
+}
+
+/* Efecto active (cuando se hace clic) */
+.close-btn:active {
+    transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic */
+}
+
+
+/* Media Queries para mayor responsividad */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .table-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .table-half {
+        width: 100%;
+    }
+
+    table {
+        width: 100%;
+        height: auto;
+    }
+
+    th, td {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+}
