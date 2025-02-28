@@ -12,8 +12,9 @@ body, html {
     padding: 0;
 }
 
-.container {
-    background-color: #08112c;
+
+    .container {
+        background: linear-gradient(to bottom, #004727, #000000);
     display: flex;
     height: 100%;
     width: 100%;
@@ -31,7 +32,7 @@ body, html {
 }
 
 .counter {
-    color: white;
+    color: #ffffff;
     font-size: 35rem;
     margin-bottom: 20px;
     font-weight: 900;
@@ -42,8 +43,8 @@ body, html {
     font-size: 2rem;
     cursor: pointer;
     border: none;
-    background: #760ffc;
-    color: white;
+    background: #00ff84;
+    color: rgb(0, 0, 0);
     border-radius: 10px;
     transition: transform 0.2s ease-in-out;
 }
@@ -81,6 +82,7 @@ table {
 }
 
 th, td {
+
     font-weight: 800;
     color: white;
     /* border: 1px solid #ddd; */
@@ -89,6 +91,7 @@ th, td {
     font-size: 1.7rem;
     word-wrap: break-word;
     position: relative;
+
 }
 
 th {
