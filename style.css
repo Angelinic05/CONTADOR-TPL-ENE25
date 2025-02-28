@@ -89,7 +89,7 @@ th, td {
     /* border: 1px solid #ddd; */
     padding: 0;
     text-align: center;
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     word-wrap: break-word;
     position: relative;
 
@@ -101,6 +101,8 @@ th, td {
 .image-cell {
     position: relative; /* Necesario para posicionar la "X" sobre la imagen */
     display: flex;
+
+    margin-top: 28%;
 
 }
 
