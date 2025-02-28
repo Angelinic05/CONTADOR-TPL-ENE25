@@ -220,7 +220,7 @@ function updateCounter() {
 
 // Datos que se mostrarán en la columna derecha (ejemplo)
 const datos = [
-    177, 178, 180, 190, 192, 195, 197, 201, 203, 205, 207, 208, 210, 211, 215, 218, 220, 222, 250
+    177, 178, 180, 190, 192, 195, 197, 200, 201, 203, 205, 207, 208, 210, 211, 215, 218, 220, 222, 250, 300
 ];
 
 // Generar filas para las tablas
@@ -237,7 +237,7 @@ for (let i = 0; i < datos.length; i++) {
         <td>${datos[i]}</td>
     `;
     
-    if (i < 10) {
+    if (i < 11) {
         tableBody1.appendChild(row); // Las primeras 15 filas en la tabla 1
     } else {
         tableBody2.appendChild(row); // Las últimas 14 filas en la tabla 2
