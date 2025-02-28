@@ -81,6 +81,7 @@ table {
     table-layout: fixed; /* Hace que las celdas tengan un tamaño fijo */
 }
 
+
 th, td {
 
     font-weight: 800;
@@ -94,17 +95,13 @@ th, td {
 
 }
 
-th {
-    /* background: #007bff; */
-    /* color: white; */
-}
+
 
 /* Ajustes para la celda de imagen */
 .image-cell {
     position: relative; /* Necesario para posicionar la "X" sobre la imagen */
     display: flex;
-    justify-content: center;
-    align-items: center;
+
 }
 
 .cross {
