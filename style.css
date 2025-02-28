@@ -69,7 +69,7 @@ body, html {
 }
 
 .table-half {
-    width: 35%; /* Ajustar el tamaño de las tablas */
+    width: 40%; /* Ajustar el tamaño de las tablas */
     height: 100%;
     overflow: hidden;
 }
@@ -89,7 +89,7 @@ th, td {
     /* border: 1px solid #ddd; */
     padding: 0;
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 2rem;
     word-wrap: break-word;
     position: relative;
 
@@ -101,8 +101,7 @@ th, td {
 .image-cell {
     position: relative; /* Necesario para posicionar la "X" sobre la imagen */
     display: flex;
-
-    margin-top: 28%;
+    margin-top: 24%;
 
 }
 
@@ -117,8 +116,8 @@ th, td {
 }
 
 .table-img {
-    width: 60px; /* Tamaño de la imagen */
-    height: 60px;
+    width: 70px; /* Tamaño de la imagen */
+    height: 70px;
     object-fit: cover; /* Asegura que la imagen se ajuste */
     border-radius: 50%; /* Forma circular */
 }
